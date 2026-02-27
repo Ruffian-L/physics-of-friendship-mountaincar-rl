@@ -1,5 +1,8 @@
 # macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
 
 # Python
 __pycache__/
@@ -7,9 +10,16 @@ __pycache__/
 *$py.class
 *.so
 .Python
+
+# Virtual environments
 env/
 venv/
 .venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Build / distribution
 build/
 develop-eggs/
 dist/
@@ -28,19 +38,27 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Environments
+# Environment / secrets
 .env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+.env.*
+*.pem
+*.key
 
-# Logs
-logs/
-*.log
-
-# User-specific
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# Logs & telemetry (large files)
+*.log
+*.jsonl
+
+# Generated output (don't ship the 3.5MB HTML export)
+Deep_Review_MountainCar_Q-SMA.html
+
+# Gemini / AI agent working files
+.gemini/
+.agent/
+.agents/

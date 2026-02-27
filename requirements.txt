@@ -1,6 +1,7 @@
-gymnasium
+gymnasium>=1.0.0
 numpy
 matplotlib
-scikit-tda
 ripser
 persim
+scikit-learn
+networkx
