@@ -112,24 +112,28 @@ The foundational work. Key breakthroughs:
 
 The emergent **zig-zag learning pattern** (Hot → Complacent → Cold → Rebound) was discovered here — learning isn't monotonic, it oscillates upward.
 
-<details>
-<summary>📊 Phase 1 Plots</summary>
+#### The Zig-Zag: Hot/Cold Oscillation to Convergence
+![The zig-zag convergence pattern — max position oscillates upward, decay rate shows TDA spikes, beta decays to lock in Q-dominance, Q-values ramp up](research_history/Phase_1_2026-02-13_TDA_Steering/plots/zigzag_pattern.png)
 
-See `research_history/Phase_1_2026-02-13_TDA_Steering/plots/` for:
-- `Phase_1_-_Loop_of_Futility.png` — the dense spiral of being stuck
-- `Phase_3_-_Post-TDA_Healing.png` — the opened spiral after intervention
-- `zigzag_pattern.png` — the four-panel convergence diagnostic
-- `well_addiction_diagnosis.png` — the "addiction to the valley bottom" trap
+#### Phase Space: From Loop of Futility → Post-TDA Healing
+| Before TDA | After TDA |
+|:---:|:---:|
+| ![Loop of Futility — dense spiral trapped at valley bottom](research_history/Phase_1_2026-02-13_TDA_Steering/plots/Phase_1_-_Loop_of_Futility.png) | ![Post-TDA Healing — spiral opens, agent builds real momentum](research_history/Phase_1_2026-02-13_TDA_Steering/plots/Phase_3_-_Post-TDA_Healing.png) |
 
-</details>
+#### The Well Addiction Trap
+![Energy vs Position shows flux accumulating at valley bottom — the agent is rewarded for staying trapped](research_history/Phase_1_2026-02-13_TDA_Steering/plots/well_addiction_diagnosis.png)
 
 ### Phase 2: Niodoo Dream (Feb 15) — 617 wins
 
 Introduced the Niodoo physics engine and dream replay. Forces from an LLM-inspired vocabulary (Gravity Well, Repulsion, Viscosity, Adrenaline, Ghost Vector) are mapped to Mountain Car physics.
 
+![617 successes with Dream Cycle — similar zig-zag with a relapse around ep 1500 that self-heals](research_history/Phase_2_2026-02-15_Niodoo_Dream/plots/dream_results.png)
+
 ### Phase 3: Energy Pump (Feb 16) — 2000/2000 wins (100%)
 
 The "push it in the direction it's going" heuristic. A trivially perfect solver (~119 steps/episode) that bypasses learning entirely. This is the well-known resonance strategy — it works, but it doesn't learn.
+
+![2000/2000 wins, 100% success rate, mean 119 steps — perfect but learns nothing](research_history/Phase_3_2026-02-16_Physics_Solver/plots/physics_results.png)
 
 ### Phase 4: The Bridge Experiments (Feb 17) — The Most Revealing Phase
 
@@ -137,22 +141,19 @@ The "push it in the direction it's going" heuristic. A trivially perfect solver 
 
 **Run 1 (Bridge 2000/2000):** Looks perfect — but the Governor override curve goes *up*, not down. The body does all the work. The mind never learns.
 
+![2000/2000 wins but governor overrides climb to 100+ per episode — the mind never earns autonomy](research_history/Phase_4_2026-02-17_Splat_Bridge/plots/bridge_results_2026-02-17_0446.png)
+
 **Run 2 (Bridge 1522/2000):** The real test. Governor overrides drop to 0 at episode 1500. The mind immediately collapses to **4.4% win rate** — *worse* than the Q-SMA baseline of 34.1%.
+
+![1522/2000 — 100% while governed, then 4.4% when independent. The teacher prevented learning.](research_history/Phase_4_2026-02-17_Splat_Bridge/plots/bridge_results.png)
 
 > **The most important finding:** Having a perfect teacher override your decisions doesn't teach you anything. The teacher actively *prevented* learning by shielding the agent from consequences.
 
 **Splat Memory Pivot:** 12 iterations evolving from splat reflexes in action selection (0/2000 — reflex spam at 3000-5000/ep overwhelmed the agent) to splats influencing only dream replay (628/2000 — soft curriculum through sleep).
 
-<details>
-<summary>📊 Phase 4 Plots</summary>
-
-See `research_history/Phase_4_2026-02-17_Splat_Bridge/plots/` for:
-- `bridge_results_2026-02-17_0446.png` — 2000/2000 but body doing everything
-- `bridge_results.png` — 1522/2000, the collapse at independence
-- `splat_results_2026-02-17_0501.png` — 0/2000, reflex spam
-- `splat_results.png` — 599/2000, the final splat iteration
-
-</details>
+| Splat Reflexes ON (0/2000 wins) | Splat Dreams Only (599/2000 wins) |
+|:---:|:---:|
+| ![Reflex spam at 3000-5000 fires/ep overwhelms the agent](research_history/Phase_4_2026-02-17_Splat_Bridge/plots/splat_results_2026-02-17_0501.png) | ![Reflexes disabled from act — splats only influence dreams](research_history/Phase_4_2026-02-17_Splat_Bridge/plots/splat_results.png) |
 
 ---
 
@@ -185,6 +186,11 @@ Each snapshot in `snapshots/` contains a `TECHNICAL_WRITEUP.md` with full archit
 
 - **`2026-02-13_1456_76wins/`** — First successful configuration. Contains the original zig-zag discovery.
 - **`FINAL_CHAMPION_681wins_LOG_FLUX/`** — Highest-performing configuration. Contains `PHYSICS_OF_ALIGNMENT.md` exploring the "minimize resistance" hypothesis.
+
+#### Final Champion: 681/2000 Wins
+![681 wins — the characteristic zig-zag converging toward mastery](snapshots/FINAL_CHAMPION_681wins_LOG_FLUX/experiment_results.png)
+
+![Final phase space — expanded spiral reaching the goal](snapshots/FINAL_CHAMPION_681wins_LOG_FLUX/Final_Phase_Space.png)
 
 ---
 
