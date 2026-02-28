@@ -83,7 +83,7 @@ def run_experiment():
             done = terminated or truncated
 
             # Standard learn (untouched contract)
-            energy = agent.learn(state, action, reward, next_state)
+            energy = agent.learn(state, action, reward, next_state, done=done)
 
             # Store transition for dream replay
             agent.remember(state, action, reward, next_state, energy)

@@ -113,7 +113,7 @@ def run_flux_mode(mode: str, total_episodes: int, seed: int,
             # ── Custom flux update (bypassing agent.learn flux block) ──
             s  = agent.discretize(state)
             ns = agent.discretize(next_state)
-            best_next = np.max(agent.q_table[ns])
+            best_next = 0.0 if done else np.max(agent.q_table[ns])
 
             phi_now  = math.sin(3 * next_state[0]) + 100 * (next_state[1] ** 2)
             phi_prev = math.sin(3 * state[0])       + 100 * (state[1] ** 2)

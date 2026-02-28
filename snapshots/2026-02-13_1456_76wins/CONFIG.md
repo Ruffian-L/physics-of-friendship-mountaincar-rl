@@ -1,6 +1,7 @@
 # Snapshot: 76 Wins / 1000 Episodes
 ## Date: 2026-02-13 14:56 PST
 ## Result: 76/1000 successes (53 in last 200 = 26.5% mastery rate)
+## Note: Phase breakdown table below sums to 65 wins; the remaining 11 likely fall on phase boundaries or reflect a different counting window.
 
 ---
 

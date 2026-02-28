@@ -22,7 +22,7 @@ The challenge: with only negative reward, Q-learning has no gradient toward succ
 
 Four interacting components:
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │                    MAIN LOOP                         │
 │  For each episode:                                   │
@@ -55,7 +55,7 @@ Four interacting components:
 
 The agent selects actions using a **weighted combination** of three systems:
 
-```
+```text
 π(s) = argmax_a [ Q(s,a) + β · F(s,a) + C(s,a) ]
 ```
 
@@ -66,7 +66,7 @@ Where:
 - `C(s,a)` = curiosity injection from TDA-detected voids
 
 With ε-greedy exploration:
-```
+```text
 a = random action     with probability ε
 a = π(s)              with probability 1-ε
 ```
@@ -75,7 +75,7 @@ a = π(s)              with probability 1-ε
 
 Standard Q-learning, but with a **yin-yang reward signal**:
 
-```
+```text
 Q(s,a) ← Q(s,a) + α · [R_shaped(s,s') + γ · max_a' Q(s',a') − Q(s,a)]
 ```
 
@@ -87,13 +87,13 @@ Where:
 
 The raw reward is always `-1`. We add a **balanced** shaping term:
 
-```
+```text
 R_shaped(s, s') = R(s,a) + κ · [Φ(s') − Φ(s)]
 ```
 
 Where the potential function `Φ` encodes the **physics of MountainCar**:
 
-```
+```text
 Φ(s) = sin(3x) + 100v²
 ```
 
@@ -113,7 +113,7 @@ Where the potential function `Φ` encodes the **physics of MountainCar**:
 
 Flux represents **habitual tendency** — actions done in high-energy states build "muscle memory":
 
-```
+```text
 if E(s') > 0.1:
     F(s,a) ← F(s,a) + 0.5
 
@@ -130,7 +130,7 @@ Where:
 
 **The handoff from intuition to logic:**
 
-```
+```text
 β(t) = max(0.1, 1.5 × 0.995^t)
 ```
 
@@ -158,7 +158,7 @@ TDA analyzes the **shape** of the agent's behavioral trajectory in phase space. 
 ### 4.2 Loop Detection (Dual Method)
 
 **Method A: Density Heuristic** (fast, always available)
-```
+```text
 center_mask = (x > -0.7) AND (x < -0.3) AND (|v| < 0.03)
 loop_density = count(center_mask) / N
 
@@ -215,7 +215,7 @@ The steering controller translates TDA diagnoses into parameter changes:
 ### 5.1 Decay Spike (Loop → Break Habit)
 
 When a loop is detected:
-```
+```text
 d ← min(0.5, d + persistence × 0.3)
 cooldown ← 10  # Don't spike again for 10 TDA intervals
 ```
@@ -225,7 +225,7 @@ The cooldown was **critical**. Without it, the system entered a degenerate state
 ### 5.2 Attractor Injection (Void → Explore)
 
 When a void is detected:
-```
+```text
 attractors.append([0.45, 0.04])  # Goal region
 ε ← min(0.4, ε + 0.1)           # Boost exploration
 ```
@@ -235,7 +235,7 @@ With deduplication: if an attractor already exists within distance 0.2, don't ad
 ### 5.3 Normalize (Relax After Intervention)
 
 After each TDA cycle:
-```
+```text
 d ← max(0.05, d × 0.85)    # Decay relaxes back
 ε ← max(0.01, ε × 0.90)    # Exploration relaxes back
 cooldown -= 1
@@ -248,7 +248,7 @@ This creates the **hot/cold oscillation**: spike (hot) → relax (cold) → spik
 ## 6. What Changed from Original to Final
 
 ### 6.1 Original Design (0% success)
-```
+```text
 - 3 rigid phases: Loop Formation → TDA Diagnosis → Healing
 - Flat flux growth: F += 0.5 always
 - Reward: raw -1 only (no shaping)
@@ -292,7 +292,7 @@ This creates the **hot/cold oscillation**: spike (hot) → relax (cold) → spik
 
 The learning curve exhibits a characteristic zig-zag that wasn't designed — it **emerged** from the interaction of the components:
 
-```
+```text
 Performance
     ↑  
     │         /\/\/\/\/\/\  ← Convergence (Ep 800+)
@@ -335,7 +335,7 @@ This is formally analogous to:
 
 ## 9. Dependencies
 
-```
+```text
 gymnasium>=1.0.0
 numpy
 matplotlib
@@ -361,7 +361,7 @@ python -W ignore src/main.py
 
 ## 11. File Structure
 
-```
+```text
 src/
 ├── agent.py      # Q-SMA Agent (Q-table + Flux + Curiosity)
 ├── tda.py        # TopologicalBrain (Ripser H1 + density heuristic + void detection)

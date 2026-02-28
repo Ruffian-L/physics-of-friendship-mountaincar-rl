@@ -40,8 +40,14 @@ class QSMA_Agent:
             d_vel = state[1] - attr[1]
             dist = np.sqrt(d_pos**2 + d_vel**2)
             
-            if dist < 0.6: 
-                curiosity += 5.0 
+            if dist < 0.6:
+                # Directional curiosity: bias toward the attractor
+                if d_pos < 0:        # agent is left of attractor
+                    curiosity[2] += 5.0  # push right toward it
+                elif d_pos > 0:      # agent is right of attractor
+                    curiosity[0] += 5.0  # push left toward it
+                else:
+                    curiosity[1] += 5.0  # neutral
 
         # PHYSICS OF HABIT: Viscosity & Flow
         # Flux = Depth of groove.
@@ -60,11 +66,11 @@ class QSMA_Agent:
             return np.random.randint(self.action_size)
         return np.argmax(priority)
 
-    def learn(self, state, action, reward, next_state):
+    def learn(self, state, action, reward, next_state, done=False):
         s = self.discretize(state)
         ns = self.discretize(next_state)
         # Q-Learning Update (alpha=0.2, gamma=0.999)
-        best_next = np.max(self.q_table[ns])
+        best_next = 0.0 if done else np.max(self.q_table[ns])
         
         # Reward shaping: YIN AND YANG (balanced positive & negative)
         # Use ENERGY CHANGE as reward signal: Φ(s') - Φ(s)
