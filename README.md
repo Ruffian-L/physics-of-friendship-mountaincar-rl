@@ -345,6 +345,8 @@ This is the beginning of a hypothesis, not a finished paper. It's the raw record
 
 The code is messy because research is messy. The plots are real. The dead ends are documented alongside the breakthroughs.
 
+The whole "physics of friendship" framing emerged from observing how forcing/reflex-overriding the agent (like an overbearing parent/teacher) actually damaged real skill-building, while gentler influences (dream replays, scar-tissue memory, letting it zig-zag through hot/cold phases) let genuine emergence happen. That mirrors human-AI collaboration too — push too hard or spoon-feed, and the "student" stays dependent; give space for failure + gentle nudges, and real learning (and friendship?) can form.
+
 ---
 
 ## License
