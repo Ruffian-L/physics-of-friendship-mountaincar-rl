@@ -130,7 +130,7 @@ def run_config(cfg_name, use_tda, use_splats, use_bridge,
             next_state, reward, terminated, truncated, _ = env.step(final_action)
             done = terminated or truncated
 
-            energy = agent.learn(state, final_action, reward, next_state)
+            energy = agent.learn(state, final_action, reward, next_state, done=done)
 
             if use_tda and brain:
                 s   = agent.discretize(state)

@@ -84,7 +84,7 @@ def run_experiment():
             done = terminated or truncated
 
             # Learn & log 6D (existing)
-            energy = agent.learn(state, action, reward, next_state)
+            energy = agent.learn(state, action, reward, next_state, done=done)
             s = agent.discretize(state)
             q = agent.q_table[s, action]
             flux = agent.flux[s, action]

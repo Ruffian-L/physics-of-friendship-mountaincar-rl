@@ -124,7 +124,7 @@ def run_bridge_experiment():
             done = terminated or truncated
             
             # Agent learns from ACTUAL outcome (not proposed action)
-            energy = agent.learn(state, final_action, reward, next_state)
+            energy = agent.learn(state, final_action, reward, next_state, done=done)
             
             # Log to TDA brain (6D: pos, vel, Q, flux, delta, energy)
             s = agent.discretize(state)

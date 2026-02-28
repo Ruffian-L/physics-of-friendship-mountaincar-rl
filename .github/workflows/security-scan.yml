@@ -59,10 +59,10 @@ jobs:
       - name: Run Flake8
         run: flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics
 
-      # 7. Pylint (Google Style Guide enforcement)
-      # Enforces Google's Python style rules if you want strict compliance.
+      # 7. Pylint (Error & Warning Detection)
+      # Checks for Python errors and warnings. Style rules (C, R) are disabled.
       # We allow it to fail without failing the whole build using 'continue-on-error'
       # so you can gradually adopt the style.
-      - name: Run Pylint (Google Style)
+      - name: Run Pylint (Errors & Warnings)
         continue-on-error: true
         run: pylint --disable=all --enable=E,F,W --output-format=colorized src/

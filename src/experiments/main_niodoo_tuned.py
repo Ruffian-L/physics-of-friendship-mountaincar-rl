@@ -94,7 +94,7 @@ def run_experiment():
             done = terminated or truncated
 
             # === STANDARD AGENT LEARN (core Q-update untouched) ===
-            agent.learn(state, action, reward, next_state)
+            agent.learn(state, action, reward, next_state, done=done)
 
             # === TUNE 2: KINETIC BONUS — small Q-table nudge post-learn ===
             # Complement the existing shaping with a tiny vel² boost

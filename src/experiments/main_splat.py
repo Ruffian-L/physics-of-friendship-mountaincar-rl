@@ -83,7 +83,7 @@ def run_splat_experiment():
             done = terminated or truncated
             
             # Agent learns — crystallizes experiences as splats
-            energy = agent.learn(state, action, reward, next_state)
+            energy = agent.learn(state, action, reward, next_state, done=done)
             
             # Store in episode buffer for dream cycle (proper 5-tuple format)
             agent.remember(state, action, reward, next_state, energy)

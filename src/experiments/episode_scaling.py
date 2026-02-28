@@ -97,7 +97,7 @@ def run_scaling(total_episodes: int, seed: int, dashboard: LiveDashboard) -> dic
             next_state, reward, terminated, truncated, _ = env.step(final_action)
             done = terminated or truncated
 
-            energy = agent.learn(state, final_action, reward, next_state)
+            energy = agent.learn(state, final_action, reward, next_state, done=done)
 
             s   = agent.discretize(state)
             q   = agent.q_table[s, final_action]

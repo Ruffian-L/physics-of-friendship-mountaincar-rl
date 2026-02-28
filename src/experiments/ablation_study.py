@@ -116,7 +116,7 @@ def run_config(cfg_name: str, use_tda: bool, use_splats: bool, use_bridge: bool,
             next_state, reward, terminated, truncated, _ = env.step(final_action)
             done = terminated or truncated
 
-            energy = agent.learn(state, final_action, reward, next_state)
+            energy = agent.learn(state, final_action, reward, next_state, done=done)
 
             # TDA logging
             if use_tda and brain:

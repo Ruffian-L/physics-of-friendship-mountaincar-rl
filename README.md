@@ -33,7 +33,7 @@ python models/physics_niodoo.py
 
 ## What's in Here
 
-```
+```text
 src/
 ├── main.py                 # Main training loop (2000 episodes, TDA every 5)
 ├── core/
@@ -75,7 +75,7 @@ MountainCar-v0 is deceptively hard for RL. The car starts in a valley and must b
 **Q-SMA** stands for Q-Learning + Sensory-Motor Attunement. The core idea: an agent needs both *logic* (Q-values: what works) and *habit* (Flux: what feels natural), and must learn to transition from one to the other.
 
 ### Action Selection
-```
+```text
 π(s) = argmax_a [ Q(s,a) + ease(F(s,a)) × β + C(s,a) ]
 ```
 - **Q(s,a)** — learned value (logic, System 2)
@@ -85,7 +85,7 @@ MountainCar-v0 is deceptively hard for RL. The car starts in a valley and must b
 
 ### Yin-Yang Reward Shaping
 The breakthrough insight. Instead of raw -1 per step, the agent receives a physics-based shaped reward:
-```
+```text
 R_shaped = R + κ × [Φ(s') − Φ(s)]
 ```
 where `Φ(s) = sin(3x) + 100v²` — a potential function that naturally creates balanced positive (gaining energy) and negative (losing energy) signals.
@@ -269,7 +269,7 @@ A complete 17-page factual report with raw data tables, all learning curves, cro
 
 ---
 
-## Key Takeaways
+## Key Takeaways (Phase 5)
 
 1. **Signal strength > physical accuracy** — a binary "this is good/bad" outperforms smooth physics gradients
 2. **The zig-zag IS the learning** — oscillation between exploration and exploitation converges from above
@@ -317,7 +317,7 @@ Each snapshot in `snapshots/` contains a `TECHNICAL_WRITEUP.md` with full archit
 - **`2026-02-13_1456_76wins/`** — First successful configuration. Contains the original zig-zag discovery.
 - **`FINAL_CHAMPION_681wins_LOG_FLUX/`** — Pre-ablation highest performer (34.05% win rate).
 
-#### Pre-Ablation Champion: 681/2000 Wins (34.05%)
+### Pre-Ablation Champion: 681/2000 Wins (34.05%)
 ![681 wins — the characteristic zig-zag converging toward mastery](snapshots/FINAL_CHAMPION_681wins_LOG_FLUX/experiment_results.png)
 
 ---

@@ -8,7 +8,7 @@
 
 The learning curve follows a distinct zig-zag pattern:
 
-```
+```text
      /\    /\   /\/\/\  ← Mastery (stable)
     /  \  /  \ /
    /    \/    \/        ← Zig-zag (learning)  

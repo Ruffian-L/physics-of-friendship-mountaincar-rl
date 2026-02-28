@@ -88,7 +88,7 @@ def run_ratio(dream_fraction: float, total_episodes: int, seed: int,
             next_state, reward, terminated, truncated, _ = env.step(final_action)
             done = terminated or truncated
 
-            energy = agent.learn(state, final_action, reward, next_state)
+            energy = agent.learn(state, final_action, reward, next_state, done=done)
 
             s   = agent.discretize(state)
             ns  = agent.discretize(next_state)
