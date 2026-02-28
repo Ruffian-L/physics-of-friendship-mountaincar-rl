@@ -1,0 +1,68 @@
+name: Security & Style Checks
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  security-and-linting:
+    name: Run Battle-Tested Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 1. Google's Open Source Vulnerability Scanner (OSV-Scanner)
+      # Checks your dependencies (requirements.txt) against Google's vulnerability database.
+      - name: Run Google OSV-Scanner
+        uses: google/osv-scanner-action/osv-scanner-action@v1.9.0
+        with:
+          scan-args: |-
+            -r
+            ./
+
+      # 2. TruffleHog Secret Scanner (Official Action)
+      # The industry standard for finding leaked API keys and passwords.
+      - name: TruffleHog Secret Scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
+
+      # 3. Python Setup for Code Scanning
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      # 4. Install standard, battle-tested Python security & linting tools
+      - name: Install Python Scanners
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit flake8 pylint
+
+      # 5. Bandit (Official Python Security Linter)
+      # Scans Python AST for known security vulnerabilities (eval, shell injection, etc.)
+      - name: Run Bandit (Python Security Scan)
+        run: bandit -r src/ -ll -i
+
+      # 6. Flake8 (Standard Python Linter)
+      # Checks for basic syntax errors and undefined names.
+      - name: Run Flake8
+        run: flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics
+
+      # 7. Pylint (Google Style Guide enforcement)
+      # Enforces Google's Python style rules if you want strict compliance.
+      # We allow it to fail without failing the whole build using 'continue-on-error'
+      # so you can gradually adopt the style.
+      - name: Run Pylint (Google Style)
+        continue-on-error: true
+        run: pylint --disable=all --enable=E,F,W --output-format=colorized src/
