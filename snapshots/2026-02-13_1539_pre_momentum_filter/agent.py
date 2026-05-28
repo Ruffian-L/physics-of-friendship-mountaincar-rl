@@ -1,0 +1,89 @@
+import numpy as np
+
+class QSMA_Agent:
+    def __init__(self, state_bins=40, action_size=3):
+        self.state_bins = state_bins
+        self.action_size = action_size
+        self.state_size = state_bins * state_bins
+        
+        # System 1 & 2
+        self.q_table = np.zeros((self.state_size, action_size))
+        self.flux = np.zeros((self.state_size, action_size))
+        
+        # Params
+        self.params = {'decay': 0.1, 'epsilon': 0.3, 'attractors': [], 'beta': 1.5}  # beta = flux weight
+        
+        # Discretization Bins
+        self.pos_bins = np.linspace(-1.2, 0.6, state_bins)
+        self.vel_bins = np.linspace(-0.07, 0.07, state_bins)
+
+    def discretize(self, state):
+        p_idx = np.digitize(state[0], self.pos_bins) - 1
+        v_idx = np.digitize(state[1], self.vel_bins) - 1
+        p_idx = max(0, min(self.state_bins - 1, p_idx))
+        v_idx = max(0, min(self.state_bins - 1, v_idx))
+        return p_idx * self.state_bins + v_idx
+
+    def sync(self, controller):
+        self.params['decay'] = controller.decay_rate
+        self.params['epsilon'] = controller.exploration_rate
+        self.params['attractors'] = controller.attractors
+
+    def act(self, state):
+        disc_state = self.discretize(state)
+        
+        # CURIOSITY INJECTION
+        curiosity = np.zeros(self.action_size)
+        for attr in self.params['attractors']:
+            d_pos = state[0] - attr[0]
+            d_vel = state[1] - attr[1]
+            dist = np.sqrt(d_pos**2 + d_vel**2)
+            
+            if dist < 0.6:
+                # Directional curiosity: bias toward the attractor
+                if d_pos < 0:        # agent is left of attractor
+                    curiosity[2] += 5.0  # push right toward it
+                elif d_pos > 0:      # agent is right of attractor
+                    curiosity[0] += 5.0  # push left toward it
+                else:
+                    curiosity[1] += 5.0  # neutral
+
+        # Hybrid Decision: Q dominates, flux provides early nudge, curiosity pulls
+        beta = self.params.get('beta', 1.5)
+        priority = self.q_table[disc_state] + (self.flux[disc_state] * beta) + curiosity
+        
+        if np.random.rand() < self.params['epsilon']:
+            return np.random.randint(self.action_size)
+        return np.argmax(priority)
+
+    def learn(self, state, action, reward, next_state, done=False):
+        s = self.discretize(state)
+        ns = self.discretize(next_state)
+        # Q-Learning Update (alpha=0.2, gamma=0.999)
+        best_next = 0.0 if done else np.max(self.q_table[ns])
+        
+        # Reward shaping: YIN AND YANG (balanced positive & negative)
+        # Use ENERGY CHANGE as reward signal: Φ(s') - Φ(s)
+        # Energy up = positive force, Energy down = equally negative force
+        
+        # Potential function: height (sin(3*pos)) + kinetic energy (vel²)
+        # sin(3*pos) is the actual height in MountainCar's cosine landscape
+        import math
+        phi_now = math.sin(3 * next_state[0]) + 100 * (next_state[1] ** 2)
+        phi_prev = math.sin(3 * state[0]) + 100 * (state[1] ** 2)
+        energy_delta = phi_now - phi_prev  # Positive when gaining, negative when losing
+        
+        shaped_reward = reward + energy_delta * 10.0  # Scale for learning speed
+        self.q_table[s, action] += 0.2 * (shaped_reward + 0.999 * best_next - self.q_table[s, action])
+        
+        # FLUX UPDATE (The Habit System)
+        position, velocity = next_state
+        energy = (position**2) + (velocity**2)
+        
+        if energy > 0.1:
+            self.flux[s, action] += 0.5 
+            
+        self.flux[s, action] *= (1.0 - self.params['decay'])
+        self.flux[s, action] = min(5.0, self.flux[s, action])  # Lower cap so Q dominates
+
+        return energy  # Return metric for logging
