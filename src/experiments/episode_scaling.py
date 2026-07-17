@@ -26,7 +26,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 import numpy as np
 import gymnasium as gym
 import matplotlib
-matplotlib.use('TkAgg')
+# Honor MPLBACKEND if the user set it; otherwise try a GUI backend and
+# fall back to headless Agg so this runs on any system.
+if not os.environ.get('MPLBACKEND'):
+    try:
+        matplotlib.use('TkAgg')
+    except Exception:
+        matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from core.steering import SteeringController

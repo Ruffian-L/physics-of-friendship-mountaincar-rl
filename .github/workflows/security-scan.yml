@@ -8,7 +8,7 @@ on:
 
 jobs:
   security-and-linting:
-    name: Run Battle-Tested Checks
+    name: Run Standard Security & Style Checks
     runs-on: ubuntu-latest
     
     steps:
@@ -43,7 +43,7 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
 
-      # 4. Install standard, battle-tested Python security & linting tools
+      # 4. Install standard, standard Python security and linting tools
       - name: Install Python Scanners
         run: |
           python -m pip install --upgrade pip

@@ -14,8 +14,8 @@ Key differences from ablation_study.py:
 
 Usage:
   cd src
-  MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.long_run_ablation
-  MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.long_run_ablation --episodes 10000 --seeds 2
+  MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.long_run_ablation
+  MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.long_run_ablation --episodes 10000 --seeds 2
   MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.long_run_ablation --episodes 5000  --seeds 1
 """
 

@@ -290,23 +290,23 @@ python3 -m venv .venv
 cd src
 
 # 2k ablation (5 configs × 3 seeds, ~45 min)
-MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.ablation_study
+MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.ablation_study
 
 # 20k long-run ablation (5 configs × 2 seeds, ~2.5 hrs)
-MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.long_run_ablation
+MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.long_run_ablation
 
 # Shorter smoke tests
-MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.ablation_study --episodes 200 --seeds 1
-MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.long_run_ablation --episodes 5000 --seeds 1
+MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.ablation_study --episodes 200 --seeds 1
+MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.long_run_ablation --episodes 5000 --seeds 1
 
 # Other experiments (flux scaling, episode scaling, dream ratio, TDA value)
-MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.flux_scaling_comparison
-MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.episode_scaling
-MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.dream_ratio_sweep
-MPLBACKEND=MacOSX ../.venv/bin/python3 -m experiments.tda_value_test
+MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.flux_scaling_comparison
+MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.episode_scaling
+MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.dream_ratio_sweep
+MPLBACKEND=Agg    ../.venv/bin/python3 -m experiments.tda_value_test
 ```
 
-Results (JSON + PNG) save automatically to `results/`. Live dashboard windows open during training (use `MPLBACKEND=Agg` to run headlessly).
+Results (JSON + PNG) save automatically to `results/`. The examples above use `MPLBACKEND=Agg`, which runs headlessly on any OS and still writes every plot to `results/`. For a **live dashboard window** during training, set a GUI backend for your platform instead: `MacOSX` on macOS, or `TkAgg`/`Qt5Agg` on Linux/Windows (the experiment runner also auto-detects one and falls back to `Agg` if none work).
 
 ---
 
