@@ -10,24 +10,33 @@ This is not a polished framework. It's the raw, messy record of a research journ
 
 ## Quick Start
 
+One command reproduces the main result (the Phase 5 component ablation — see the results table below). It creates a virtualenv, installs pinned dependencies, and runs the study headlessly:
+
 ```bash
-# Clone
 git clone https://github.com/Ruffian-L/physics-of-friendship-mountaincar-rl.git
 cd physics-of-friendship-mountaincar-rl
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the main experiment (2000 episodes, ~10-15 min)
-cd src
-python main.py
-
-# Run with visual rendering
-python main.py --render
-
-# Run the physics-only solver (2000/2000 wins, ~2 min)
-python models/physics_niodoo.py
+bash reproduce.sh            # full ablation: 5 configs × 3 seeds × 2000 episodes (~45–90 min)
+bash reproduce.sh --quick    # smoke test: 200 episodes × 1 seed (~5 min)
+# (make reproduce / make quick do the same thing)
 ```
+
+Other entry points, once the venv exists:
+
+```bash
+cd src
+
+# The original single-run training loop (2000 episodes, deterministic with --seed)
+../.venv/bin/python3 main.py --seed 42
+
+# With visual rendering
+../.venv/bin/python3 main.py --render
+
+# The physics-only solver (2000/2000 wins, ~2 min — a scripted solver, not learning)
+../.venv/bin/python3 models/physics_niodoo.py
+```
+
+**Reproducibility:** the environment is pinned (`requirements.txt`, verified on Python 3.11), and seeds now cover all three sources of randomness — numpy, Python's `random`, and the gym environment itself. Historical results in `results/` were produced before env-level seeding existed, so re-runs should match the reported numbers closely but not bit-for-bit.
 
 ---
 
@@ -60,6 +69,10 @@ research_history/           # Phase-by-phase plots and logs
 
 scripts/
 └── diagnose_well_addiction.py  # Diagnostic: visualizes the "well trap"
+
+reproduce.sh                # One-command reproduction of the main result
+Makefile                    # make reproduce / make quick
+requirements.txt            # Pinned dependencies (Python 3.11)
 ```
 
 ---
@@ -282,10 +295,12 @@ A complete 17-page factual report with raw data tables, all learning curves, cro
 
 ## Running the Experiment Suite
 
+`bash reproduce.sh` covers the main ablation. To run the other experiments individually:
+
 ```bash
-# Create venv and install dependencies
+# Create venv and install pinned dependencies (reproduce.sh does this too)
 python3 -m venv .venv
-.venv/bin/pip install gymnasium numpy matplotlib networkx scikit-learn
+.venv/bin/pip install -r requirements.txt
 
 cd src
 
@@ -324,14 +339,7 @@ Each snapshot in `snapshots/` contains a `TECHNICAL_WRITEUP.md` with full archit
 
 ## Dependencies
 
-- Python 3.8+
-- `gymnasium>=1.0.0`
-- `numpy`
-- `matplotlib`
-- `ripser` (for persistent homology — optional, falls back to heuristic)
-- `persim`
-- `scikit-learn`
-- `networkx`
+Pinned in `requirements.txt` (verified on Python 3.11): `gymnasium`, `numpy`, `matplotlib`, `ripser` (persistent homology — optional at runtime, falls back to a density heuristic), `persim`, `scikit-learn`, `networkx`.
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
@@ -345,8 +353,29 @@ This is the beginning of a hypothesis, not a finished paper. It's the raw record
 
 The code is messy because research is messy. The plots are real. The dead ends are documented alongside the breakthroughs.
 
+### Why this exists
+
+In December we released Niodoo steering — a collaboration between me and a stack of AI systems (Claude, Gemini, Grok). It got called slop. I got called worse. I can't read code line by line, and when the work was dismissed, that insecurity had somewhere to land.
+
+This repo is what happened next. We pointed the same ideas — physics forces, habit fields, topological self-monitoring — at MountainCar, a benchmark that doesn't care who built the thing or how. The ideas meshed, and the agent climbed out of the valley. That was the validation.
+
+Two honest footnotes. First: a physics-forces-only run later hit 3,000/3,000, but it isn't in this repo — a scripted solver isn't learning, and putting it up as a headline would have been cheating (the 2,000/2,000 Phase 3 version above is documented with exactly that caveat). Second: the finding I keep coming back to is the Bridge result — a perfect teacher that overrides every decision produces an agent that collapses the moment it's on its own. Over-governing fails, every time. That one wasn't just about the agent. ❤️
+
+---
+
+## What Hasn't Been Independently Verified
+
+In the spirit of honesty, the current state of verification:
+
+- **The 2k ablation pipeline runs end-to-end** on a fresh clone with pinned dependencies (`bash reproduce.sh --quick` verified 2026-07-21). The full-scale numbers in the tables above are from the February 2026 runs.
+- **The 20k long-run results** (~2.5 hrs × 2 seeds) have not been re-run since February 2026.
+- **Historical results predate full seeding.** Runs before 2026-07-21 seeded numpy only, not Python's `random` or the gym env, so they are not bit-for-bit reproducible — expect close-but-not-identical numbers on re-run.
+- **Ripser vs. the density heuristic** has never been isolated — TDA's measured contribution may come entirely from the cheap heuristic.
+- **The 3,000/3,000 physics-only run** mentioned above is not archived in this repo.
+- **Phases 1–4 results** come from the frozen code in `snapshots/` and `research_history/`, which is kept as-is (it is the historical record, not the current pipeline).
+
 ---
 
 ## License
 
-MIT
+[MIT](LICENSE)

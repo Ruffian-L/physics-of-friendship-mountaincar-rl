@@ -56,6 +56,7 @@ DREAM_FRACTION  = 0.3
 def run_scaling(total_episodes: int, seed: int, dashboard: LiveDashboard) -> dict:
     SeedManager.apply(seed)
     env = gym.make('MountainCar-v0')
+    SeedManager.seed_env(env, seed)
 
     ctrl   = SteeringController()
     brain  = TopologicalBrain(ctrl)

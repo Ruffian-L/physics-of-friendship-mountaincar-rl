@@ -14,6 +14,7 @@ The window updates at the end of every UPDATE_EVERY episode.
 import numpy as np
 import json
 import os
+import random
 import time
 from datetime import datetime
 from collections import deque
@@ -85,6 +86,14 @@ class SeedManager:
     @staticmethod
     def apply(seed: int):
         np.random.seed(seed)
+        random.seed(seed)
+
+    @staticmethod
+    def seed_env(env, seed: int):
+        """Seed the gym env's RNG and action space. Call once, right after gym.make."""
+        env.reset(seed=seed)
+        env.action_space.seed(seed)
+        return env
 
     @staticmethod
     def get_seeds(n: int):

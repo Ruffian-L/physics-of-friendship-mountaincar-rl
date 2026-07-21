@@ -79,6 +79,7 @@ def run_config(cfg_name, use_tda, use_splats, use_bridge,
 
     SeedManager.apply(seed)
     env = gym.make('MountainCar-v0')
+    SeedManager.seed_env(env, seed)
 
     # Governor phases scale with episode count
     governor_warmup   = int(total_episodes * 0.05)   # 5% warmup

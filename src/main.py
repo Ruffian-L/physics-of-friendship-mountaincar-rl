@@ -1,5 +1,6 @@
 import gymnasium as gym
 import numpy as np
+import random
 import matplotlib.pyplot as plt
 from core.steering import SteeringController
 from core.tda import TopologicalBrain
@@ -38,11 +39,17 @@ def plot_phase_space(brain, title):
 def run_experiment():
     parser = argparse.ArgumentParser()
     parser.add_argument('--render', action='store_true', help='Render the environment visually')
+    parser.add_argument('--seed', type=int, default=42, help='Random seed (numpy, random, env)')
     args = parser.parse_args()
+
+    np.random.seed(args.seed)
+    random.seed(args.seed)
 
     render_mode = 'human' if args.render else None
     env = gym.make('MountainCar-v0', render_mode=render_mode)
-    
+    env.reset(seed=args.seed)
+    env.action_space.seed(args.seed)
+
     ctrl = SteeringController()
     brain = TopologicalBrain(ctrl)
     agent = QSMA_Agent()

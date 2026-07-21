@@ -159,6 +159,7 @@ def run_tda_config(cfg_name: str, use_tda: bool, use_ripser: bool,
 
     SeedManager.apply(seed)
     env = gym.make('MountainCar-v0')
+    SeedManager.seed_env(env, seed)
 
     ctrl   = SteeringController()
     brain  = PatchedTopoBrain(ctrl, use_ripser=use_ripser) if use_tda else None

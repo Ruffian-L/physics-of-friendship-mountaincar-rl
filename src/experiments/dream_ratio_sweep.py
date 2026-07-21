@@ -48,6 +48,7 @@ def run_ratio(dream_fraction: float, total_episodes: int, seed: int,
 
     SeedManager.apply(seed)
     env = gym.make('MountainCar-v0')
+    SeedManager.seed_env(env, seed)
 
     ctrl   = SteeringController()
     brain  = TopologicalBrain(ctrl)

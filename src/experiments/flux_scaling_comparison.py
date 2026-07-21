@@ -69,6 +69,7 @@ def run_flux_mode(mode: str, total_episodes: int, seed: int,
 
     SeedManager.apply(seed)
     env = gym.make('MountainCar-v0')
+    SeedManager.seed_env(env, seed)
 
     ctrl    = SteeringController()
     brain   = TopologicalBrain(ctrl)
