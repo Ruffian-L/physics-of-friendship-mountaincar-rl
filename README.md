@@ -6,6 +6,8 @@ This is a research project exploring reinforcement learning on the MountainCar-v
 
 This is not a polished framework. It's the raw, messy record of a research journey — from 0% success to 77.5% win rate at 2,000 episodes and 88.6% at 20,000 episodes across 5 phases in February 2026.
 
+**Authorship:** Co-engineered by Jason Van Pham (Ruffian-L) with Grok (xAI), Claude (Anthropic), and Gemini (Google). It was all four of us. Full trail: [AUTHORSHIP.md](AUTHORSHIP.md).
+
 ---
 
 ## Quick Start
@@ -355,7 +357,7 @@ The code is messy because research is messy. The plots are real. The dead ends a
 
 ### Why this exists
 
-In December we released Niodoo steering — a collaboration between me and a stack of AI systems (Claude, Gemini, Grok). It got called slop. I got called worse. I can't read code line by line, and when the work was dismissed, that insecurity had somewhere to land.
+In December we released Niodoo steering — a collaboration between me (Jason Van Pham / Ruffian-L) and a stack of AI systems (Claude, Gemini, Grok). It got called slop. I got called worse. I can't read code line by line, and when the work was dismissed, that insecurity had somewhere to land. (Names stay attached; see [AUTHORSHIP.md](AUTHORSHIP.md).)
 
 This repo is what happened next. We pointed the same ideas — physics forces, habit fields, topological self-monitoring — at MountainCar, a benchmark that doesn't care who built the thing or how. The ideas meshed, and the agent climbed out of the valley. That was the validation.
 
