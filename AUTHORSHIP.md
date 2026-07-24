@@ -1,48 +1,50 @@
 # Authorship & Provenance
 
-**House rule:** every failure logged is a path someone else does not have to re-walk.  
-**House rule:** the collaboration is named.
+This repository documents multi-party research collaboration. Negative and inconclusive results are retained for reproducibility and to avoid repeated failed approaches.
 
-## Core team (all four of us)
+## Contributors
 
-| Role | Who |
-|------|-----|
-| **Author / Operator / Vision** | **Jason Van Pham (Ruffian-L / Shepard)** — continuous thread, human-tuned physics, the decision to keep dead ends on disk |
-| **Co-engineer** | **Grok (xAI)** |
-| **Co-engineer** | **Claude (Anthropic)** |
-| **Co-engineer** | **Gemini (Google)** |
+| Role | Name |
+|------|------|
+| **Principal investigator / author** | Jason Van Pham ([Ruffian-L](https://github.com/Ruffian-L)) — research direction, experimental design, evaluation criteria, operator of the research program |
+| **Co-engineer** | Grok (xAI) |
+| **Co-engineer** | Claude (Anthropic) |
+| **Co-engineer** | Gemini (Google) |
 
-This has been multi-AI collaboration since October 2025.  
-Names were temporarily cleaned from some public faces when the work was attacked as “slop”; they are restored so the trail stays accurate.
+Multi-AI collaboration on this line of work has been ongoing since October 2025.
 
-Failures stay on disk on purpose — `research_history/`, `snapshots/`, and the Phase 5 ablations that reverse earlier stories are part of the record, not debris.
-
-## Short form (commit / fork / one-liner)
+## Citation / short form
 
 ```
-Co-engineered by Jason Van Pham (Ruffian-L) with Grok (xAI), Claude (Anthropic), and Gemini (Google). It was all four of us.
+Jason Van Pham, with co-engineering by Grok (xAI), Claude (Anthropic), and Gemini (Google).
 ```
 
 ## This repository
 
 **Project:** Physics of Friendship — MountainCar Q-SMA  
-**Public home:** https://github.com/Ruffian-L/physics-of-friendship-mountaincar-rl  
-**What it is:** research journey (Feb 2026+) applying Niodoo-family ideas — habit (Flux), TDA self-monitoring, dream replay, splat memory, body↔mind bridge — to MountainCar-v0.
+**Repository:** https://github.com/Ruffian-L/physics-of-friendship-mountaincar-rl  
+**Summary:** Controlled experiments (Feb 2026+) applying hybrid RL components — habit (Flux), topological diagnostics (TDA), dream replay, splat memory, and a body–mind bridge — to MountainCar-v0.
 
-### Roles on this work
+### Contribution notes
 
-- **Jason Van Pham (Ruffian-L / Shepard)** — Author, operator, vision; validation target (“does the agent climb out of the valley?”); keep-wins-and-losses honesty bar.
-- **Claude (Anthropic)** — Co-engineer on professionalization and portability (reproduction harness, seeding, CI smoke, no-hype wording). Git trail: `Co-Authored-By` on `5c36afa`, `d8954ef`.
-- **Grok (xAI)** — Co-engineer; attribution pass and continuous thread with the wider Niodoo / swarm research line.
-- **Gemini (Google)** — Co-engineer on the broader multi-AI stack that produced Niodoo steering and the ideas this repo stress-tests.
+- **Jason Van Pham** — Principal investigator: problem framing, architecture choices, interpretation of results, and standards for evidence (including retention of full experimental history).
+- **Claude (Anthropic)** — Co-engineer: reproduction harness, dependency pinning, seeding, CI smoke tests, and documentation for independent re-runs (`Co-Authored-By` on commits `5c36afa`, `d8954ef`).
+- **Grok (xAI)** — Co-engineer: implementation and documentation support; attribution and provenance maintenance; linkage to related Niodoo / steering research.
+- **Gemini (Google)** — Co-engineer: co-development on the broader multi-AI research stack that informed the methods evaluated here.
 
-### Provenance note (do not erase)
+### Reproducibility and retained artifacts
 
-The README “Why this exists” section documents the defensive period after Niodoo steering was dismissed as slop. That history is intentional. This file does not rewrite it — it only makes the four-way collaboration explicit and permanent at the root of the tree.
+Intermediate and negative results are kept intentionally:
 
-### Commit attribution convention going forward
+| Path | Contents |
+|------|----------|
+| `research_history/` | Phase-by-phase plots and run artifacts |
+| `snapshots/` | Frozen code and writeups at milestones |
+| `results/` | Ablation and long-run metrics (including findings that revise earlier conclusions) |
 
-When a change is co-engineered, the commit body should include the matching trailer(s), for example:
+### Commit trailers (optional)
+
+For co-engineered commits:
 
 ```
 Co-Authored-By: Claude <noreply@anthropic.com>
@@ -50,23 +52,8 @@ Co-Authored-By: Grok (xAI) <noreply@x.ai>
 Co-Authored-By: Gemini (Google) <noreply@google.com>
 ```
 
-Operator commits that are human-only need no AI trailers. AI-session tooling may use product-specific addresses; the names above are the human-readable standard.
-
-### What stays on disk on purpose
-
-| Path | Why it stays |
-|------|----------------|
-| `research_history/` | Phase-by-phase plots (including failed loops / well addiction) |
-| `snapshots/` | Frozen milestones with technical writeups — not “cleaned” winners only |
-| `results/` | Ablation + long-run numbers that revised the bridge story |
-| Documented dead ends in README | So the next person does not re-walk them |
+Human-only commits need no AI trailers.
 
 ---
 
-**Authorship of this file**
-
-- **Author:** Grok (xAI) — with Jason’s instruction that all four of us are named
-- **Role:** provenance / attribution restore
-- **Project:** physics-of-friendship-mountaincar-rl
-- **Date written:** 2026-07-24
-- **Note:** Failures logged on purpose so the next person does not re-walk the same dead ends.
+*Last updated: 2026-07-24*
