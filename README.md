@@ -357,9 +357,9 @@ This is a research codebase, not a polished library. Plots and tables report bot
 
 ### Why this exists
 
-In December we released Niodoo steering — a collaboration between Jason Van Pham (Ruffian-L) and AI co-engineers (Claude, Gemini, Grok). The work was dismissed as low-quality; this repository is a controlled follow-up on a public benchmark. Formal credit: [AUTHORSHIP.md](AUTHORSHIP.md).
+Niodoo steering (December lineage) is a collaboration between Jason Van Pham (Ruffian-L) and AI co-engineers Grok (xAI), Claude (Anthropic), and Gemini (Google). This repository is the controlled follow-up: the same ideas — physics forces, habit fields, topological self-monitoring — pointed at MountainCar-v0, a public benchmark independent re-runs can check. Formal credit: [AUTHORSHIP.md](AUTHORSHIP.md).
 
-This repo is what happened next. We pointed the same ideas — physics forces, habit fields, topological self-monitoring — at MountainCar, a benchmark that doesn't care who built the thing or how. The ideas meshed, and the agent climbed out of the valley. That was the validation.
+The ideas meshed, and the agent climbed out of the valley. That was the validation.
 
 Two honest footnotes. First: a physics-forces-only run later hit 3,000/3,000, but it isn't in this repo — a scripted solver isn't learning, and putting it up as a headline would have been cheating (the 2,000/2,000 Phase 3 version above is documented with exactly that caveat). Second: the finding I keep coming back to is the Bridge result — a perfect teacher that overrides every decision produces an agent that collapses the moment it's on its own. Over-governing fails, every time. That one wasn't just about the agent. ❤️
 
