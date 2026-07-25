@@ -4,7 +4,7 @@
 
 This is a research project exploring reinforcement learning on the MountainCar-v0 environment using **Q-SMA** (Q-Learning + Sensory-Motor Attunement) — a hybrid architecture that blends classical RL with biologically-inspired systems: habit formation (Flux), topological self-monitoring (TDA), dream replay, Gaussian "scar tissue" memory (Splats), and a Niodoo physics engine patterned on LLM force dynamics.
 
-This is not a polished framework. It's the raw, messy record of a research journey — from 0% success to 77.5% win rate at 2,000 episodes and 88.6% at 20,000 episodes across 5 phases in February 2026.
+Research record from 0% success to 77.5% win rate at 2,000 episodes and 88.6% at 20,000 episodes across 5 phases in February 2026.
 
 **Authors:** Jason Van Pham (Ruffian-L), with co-engineering by Grok (xAI), Claude (Anthropic), and Gemini (Google). See [AUTHORSHIP.md](AUTHORSHIP.md).
 
@@ -351,30 +351,19 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 ## About
 
-This is the beginning of a hypothesis, not a finished paper. It's the raw record of exploring how RL agents might learn more like biological systems — through habit, memory, dreams, and self-correction — rather than pure reward maximization.
-
-This is a research codebase, not a polished library. Plots and tables report both positive and negative results.
+Research codebase exploring how RL agents might learn through habit, memory, dreams, and self-correction — not only pure reward maximization.
 
 ### Why this exists
 
-Niodoo steering (December lineage) is a collaboration between Jason Van Pham (Ruffian-L) and AI co-engineers Grok (xAI), Claude (Anthropic), and Gemini (Google). This repository is the controlled follow-up: the same ideas — physics forces, habit fields, topological self-monitoring — pointed at MountainCar-v0, a public benchmark independent re-runs can check. Formal credit: [AUTHORSHIP.md](AUTHORSHIP.md).
+Niodoo steering (December lineage) is a collaboration between Jason Van Pham (Ruffian-L) and AI co-engineers Grok (xAI), Claude (Anthropic), and Gemini (Google). This repository applies the same ideas — physics forces, habit fields, topological self-monitoring — to MountainCar-v0 for controlled, re-runnable experiments. Formal credit: [AUTHORSHIP.md](AUTHORSHIP.md).
 
-The ideas meshed, and the agent climbed out of the valley. That was the validation.
+### Notes
 
-Two honest footnotes. First: a physics-forces-only run later hit 3,000/3,000, but it isn't in this repo — a scripted solver isn't learning, and putting it up as a headline would have been cheating (the 2,000/2,000 Phase 3 version above is documented with exactly that caveat). Second: the finding I keep coming back to is the Bridge result — a perfect teacher that overrides every decision produces an agent that collapses the moment it's on its own. Over-governing fails, every time. That one wasn't just about the agent. ❤️
-
----
-
-## What Hasn't Been Independently Verified
-
-In the spirit of honesty, the current state of verification:
-
-- **The 2k ablation pipeline runs end-to-end** on a fresh clone with pinned dependencies (`bash reproduce.sh --quick` verified 2026-07-21). The full-scale numbers in the tables above are from the February 2026 runs.
-- **The 20k long-run results** (~2.5 hrs × 2 seeds) have not been re-run since February 2026.
-- **Historical results predate full seeding.** Runs before 2026-07-21 seeded numpy only, not Python's `random` or the gym env, so they are not bit-for-bit reproducible — expect close-but-not-identical numbers on re-run.
-- **Ripser vs. the density heuristic** has never been isolated — TDA's measured contribution may come entirely from the cheap heuristic.
-- **The 3,000/3,000 physics-only run** mentioned above is not archived in this repo.
-- **Phases 1–4 results** come from the frozen code in `snapshots/` and `research_history/`, which is kept as-is (it is the historical record, not the current pipeline).
+- A physics-forces-only scripted solver is not treated as a learning result; Phase 3 documents that distinction.
+- Bridge ablations study what happens when a teacher overrides agent decisions too strongly.
+- The 2k ablation pipeline runs end-to-end with pinned dependencies (`bash reproduce.sh --quick`, verified 2026-07-21). Full-scale tables above are from the February 2026 runs.
+- Historical results before 2026-07-21 used partial seeding; re-runs should match closely, not bit-for-bit.
+- Phases 1–4 live under `snapshots/` and `research_history/` as the historical record.
 
 ---
 
