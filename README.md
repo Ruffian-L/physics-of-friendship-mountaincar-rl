@@ -1,12 +1,25 @@
-# The Physics of Friendship: MountainCar Q-SMA
+# The Physics of Friendship — MountainCar Q-SMA
 
-> **An exploration of how habits, topology, memory, and physics combine to teach an agent to escape a valley.**
+Controlled RL study on **MountainCar-v0**: habits, topology (TDA), dream/replay memory, Gaussian **reflex** memory (splats), and physics-style force vocabulary — does scaffolding help escape the valley?
 
-This is a research project exploring reinforcement learning on the MountainCar-v0 environment using **Q-SMA** (Q-Learning + Sensory-Motor Attunement) — a hybrid architecture that blends classical RL with biologically-inspired systems: habit formation (Flux), topological self-monitoring (TDA), dream replay, Gaussian "scar tissue" memory (Splats), and a Niodoo physics engine patterned on LLM force dynamics.
+**Lead:** Jason Van Pham ([Ruffian-L](https://github.com/Ruffian-L))  
+**Co-engineering:** Grok · Claude · Gemini · (Codex credited on related Niodoo lines) — [AUTHORSHIP.md](AUTHORSHIP.md)
 
-Research record from 0% success to 77.5% win rate at 2,000 episodes and 88.6% at 20,000 episodes across 5 phases in February 2026.
+> **Not** a claim that more systems always win.  
+> **Splats** here = **reflex / hesitation geometry** (not “AI emotions”).  
+> **Best face** = reproducible ablation + **negative findings kept**.
 
-**Authors:** Jason Van Pham (Ruffian-L), with co-engineering by Grok (xAI), Claude (Anthropic), and Gemini (Google). See [AUTHORSHIP.md](AUTHORSHIP.md).
+## Best face of this repo
+
+| Strength | Where |
+|----------|--------|
+| **One-command repro** | `bash reproduce.sh` / `--quick` smoke |
+| **Matched ablations** | Multi-config, multi-seed component study |
+| **Wins and losses** | Long-run tables include arms where **simpler scaffolds win** — design constraint, not buried |
+| **Pinned env** | `requirements.txt`, seed coverage (historical runs noted if pre-env-seed) |
+| **What it is not** | LLM product · consciousness demo · “friendship physics” as marketing science |
+
+Research arc (Feb 2026 era): from ~0% success through multi-phase climbs (e.g. high win rates at 2k / 20k episodes in phase logs) — always read the **ablation**, not only the champion snapshot.
 
 ---
 
