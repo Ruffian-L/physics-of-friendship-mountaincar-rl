@@ -17,7 +17,7 @@ Controlled RL study on **MountainCar-v0**: habits, topology (TDA), dream/replay 
 | **Matched ablations** | Multi-config, multi-seed component study |
 | **Wins and losses** | Long-run tables include arms where **simpler scaffolds win** — design constraint, not buried |
 | **Pinned env** | `requirements.txt`, seed coverage (historical runs noted if pre-env-seed) |
-| **What it is not** | LLM product · consciousness demo · “friendship physics” as marketing science |
+| **What it is not** | An LLM product |
 
 Research arc (Feb 2026 era): from ~0% success through multi-phase climbs (e.g. high win rates at 2k / 20k episodes in phase logs) — always read the **ablation**, not only the champion snapshot.
 
